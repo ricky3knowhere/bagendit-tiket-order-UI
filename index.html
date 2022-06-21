@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg sticky-top shadow bg-info">
+  <!-- <nav class="navbar navbar-expand-lg sticky-top shadow bg-info">
     <div class="container">
       <a class="navbar-brand" href="#"><i class="fa fa-ticket me-2"
           style="transform: rotate(-30deg) scale(1.2);"></i>Bagendit Ticketing</a>
@@ -81,15 +81,14 @@
         </div>
       </div>
     </div>
-  </nav>
-  <div class="container mt-5">
+  </nav> -->
+  <!-- <div class="container mt-5">
     <h3 class="my-4"> <i class="fa fa-angle-double-right me-2"></i> <i class="fa fa-map-location-dot me-2"></i>Jumlah
       Pengunjung Berdasarkan Daerah Asal</h3>
-    <div class="p-3 mt-3 ms-5 card shadow rounded-4"
-      style="margin-bottom: 5em;width: 70%;background:#f3e2cc">
+    <div class="p-3 mt-3 ms-5 card shadow rounded-4" style="margin-bottom: 5em;width: 70%;background:#f3e2cc">
       <canvas id="canvas" style="padding:0em"></canvas>
-    </div>
-    <h3 class="my-4"> <i class="fa fa-angle-double-right me-2"></i> <i
+    </div> -->
+  <!-- <h3 class="my-4"> <i class="fa fa-angle-double-right me-2"></i> <i
         class="fa fa-money-bill-trend-up me-2"></i>Penghasilan Perminggu</h3>
     <div class="p-3 mt-3 ms-5 card shadow rounded-4" style="margin-bottom: 5em;width: 70%;background:white">
       <canvas id="canvas1"></canvas>
@@ -107,7 +106,7 @@
     <div class="p-3 mt-3 ms-5 card shadow rounded-4"
       style="margin-bottom: 5em;width: 70%;background:rgba(171, 205, 239, 0)">
       <div id="chartHolder" style="width:100%; height:500px;"></div>
-    </div>
+    </div> -->
 
   </div>
   <!-- Bootstrap JS -->
@@ -119,25 +118,87 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@3.8.0/build/index.umd.min.js"></script>
 
   <script>
-    var values = [
-      ['Nusa Tenggara Timur', 16],
-      ['Bengkulu', 22],
-      ['Maluku Utara', 18],
-      ['Sulawesi Barat', 21],
-      ['Sumatera Barat', 13],
-      ['Banten', 21],
-      ['Kepulauan Riau', 18],
-      ['Nusa Tenggara Barat', 25],
-      ['Sulawesi Utara', 27],
-      ['Sulawesi Tengah', 24],
-      ['Irian Jaya Barat', 20],
-      ['Sulawesi Tenggara', 14],
-      ['Bangka-Belitung', 24],
-      ['Bali', 19],
+    const visitors = [{
+        pos_kode_id: "63268",
+        provinsi: "Nusa Tenggara Timur",
+        pengunjung: "16"
+      },
+      {
+        pos_kode_id: "06809",
+        provinsi: "Bengkulu",
+        pengunjung: "22"
+      },
+      {
+        pos_kode_id: "25905",
+        provinsi: "Maluku Utara",
+        pengunjung: "18"
+      },
+      {
+        pos_kode_id: "63330",
+        provinsi: "Sulawesi Barat",
+        pengunjung: "21"
+      },
+      {
+        pos_kode_id: "65863",
+        provinsi: "Sumatera Barat",
+        pengunjung: "13"
+      },
+      {
+        pos_kode_id: "35954",
+        provinsi: "Banten",
+        pengunjung: "21"
+      },
+      {
+        pos_kode_id: "88992",
+        provinsi: "Kepulauan Riau",
+        pengunjung: "18"
+      },
+      {
+        pos_kode_id: "19093",
+        provinsi: "Nusa Tenggara Barat",
+        pengunjung: "25"
+      },
+      {
+        pos_kode_id: "44786",
+        provinsi: "Sulawesi Utara",
+        pengunjung: "27"
+      },
+      {
+        pos_kode_id: "01028",
+        provinsi: "Sulawesi Tengah",
+        pengunjung: "24"
+      },
+      {
+        pos_kode_id: "85337",
+        provinsi: "Papua Barat",
+        pengunjung: "20"
+      },
+      {
+        pos_kode_id: "54462",
+        provinsi: "Sulawesi Tenggara",
+        pengunjung: "14"
+      },
+      {
+        pos_kode_id: "36837",
+        provinsi: "Kepulauan Riau",
+        pengunjung: "18"
+      },
+      {
+        pos_kode_id: "32869",
+        provinsi: "Bangka Belitung",
+        pengunjung: "24"
+      },
+      {
+        pos_kode_id: "95993",
+        provinsi: "Bali",
+        pengunjung: "19"
+      },
     ]
 
+    var values = []
 
-
+    values = visitors.map(e => [e.provinsi, parseInt(e.pengunjung)])
+    console.log(values);
     const country = fetch(
       './js/asia.json'
     ).then((r) => r.json());
@@ -206,7 +267,7 @@
     });
   </script>
 
-  <script>
+  <!-- <script>
     const data = {
       labels: ['Week 17', 'Week 18', 'Week 19', 'Week 20', 'Week 21', 'Week 22', 'Week 23'],
       datasets: [{
@@ -386,52 +447,16 @@
 
     const ctx2 = document.getElementById('canvas2').getContext('2d');
     const myChart2 = new Chart(ctx2, config2);
-    //   fetch('./js/datamaps.idn.min.json').then((r) => r.json()).then((idn) => {
-    //   const nation = ChartGeo.topojson.feature(idn, idn.objects.nation).features[0];
-    //   const states = ChartGeo.topojson.feature(idn, idn.objects.states).features;
-    // console.log(nation);
-    // console.log(states);
-    //   const chart = new Chart(document.getElementById("canvas").getContext("2d"), {
-    //     type: 'choropleth',
-    //     data: {
-    //       labels: states.map((d) => d.properties.name),
-    //       datasets: [{
-    //         label: 'States',
-    //         outline: nation,
-    //         data: states.map((d) => ({feature: d, value: Math.random() * 10})),
-    //       }]
-    //     },
-    //     options: {
-    //       plugins: {
-    //         legend: {
-    //           display: false
-    //         },
-    //       },
-    //       scales: {
-    //         xy: {
-    //           projection: 'albersUsa'
-    //         },
-    //         color: {
-    //           quantize: 5,
-    //           legend: {
-    //             position: 'bottom-right',
-    //             align: 'bottom'
-    //           },
-    //         }
-    //       },
-    //     }
-    //   });
-    // });
-  </script>
+  </script> -->
 
-  <script>
+  <!-- <script>
     var chartVars = "KoolOnLoadCallFunction=chartReadyHandler";
 
     KoolChart.create("chart1", "chartHolder", chartVars, "100%", "100%");
 
     function chartReadyHandler(id) {
       document.getElementById(id).setLayout(layoutStr);
-      document.getElementById(id).setData(chartData);
+      document.getElementById(id).setData(finalData);
     }
 
     var layoutStr =
@@ -515,99 +540,469 @@
 		</Bump2DChart>
 	</KoolChart>`
 
-    var chartData = [{
-        "Week": "Week 17",
-        'mesjid al-ahzar': 130,
-        'kantin bagendit': 130,
-        'bagendit store': 130,
-        'taman main anak': 130,
-        'photo spots': 81,
-        'taman anggrek': 81,
-        'sport area': 81,
-        'danau eceng': 49,
-        'jelajah danau': 49,
-        'wisata alam bagendit': 49,
+    const favoritePlace = [{
+        "objek_wisata_id": 1,
+        "nama": "mesjid al-ahzar",
+        "week": 17,
+        "sum": "173"
       },
       {
-        "Week": "Week 18",
-        'mesjid al-ahzar': 1999,
-        'kantin bagendit': 1999,
-        'bagendit store': 1999,
-        'taman main anak': 1999,
-        'photo spots': 1354,
-        'taman anggrek': 1354,
-        'sport area': 1354,
-        'danau eceng': 577,
-        'jelajah danau': 577,
-        'wisata alam bagendit': 577,
+        "objek_wisata_id": 1,
+        "nama": "mesjid al-ahzar",
+        "week": 18,
+        "sum": "2022"
       },
       {
-        "Week": "Week 19",
-        'mesjid al-ahzar': 2007,
-        'kantin bagendit': 2007,
-        'bagendit store': 2007,
-        'taman main anak': 2007,
-        'photo spots': 1206,
-        'taman anggrek': 1206,
-        'sport area': 1206,
-        'danau eceng': 561,
-        'jelajah danau': 561,
-        'wisata alam bagendit': 561,
+        "objek_wisata_id": 1,
+        "nama": "mesjid al-ahzar",
+        "week": 19,
+        "sum": "2060"
       },
       {
-        "Week": "Week 20",
-        'mesjid al-ahzar': 1897,
-        'kantin bagendit': 1897,
-        'bagendit store': 1897,
-        'taman main anak': 1897,
-        'photo spots': 1362,
-        'taman anggrek': 1362,
-        'sport area': 1362,
-        'danau eceng': 490,
-        'jelajah danau': 490,
-        'wisata alam bagendit': 490,
+        "objek_wisata_id": 1,
+        "nama": "mesjid al-ahzar",
+        "week": 20,
+        "sum": "1837"
       },
       {
-        "Week": "Week 21",
-        'mesjid al-ahzar': 1511,
-        'kantin bagendit': 1511,
-        'bagendit store': 1511,
-        'taman main anak': 1511,
-        'photo spots': 1079,
-        'taman anggrek': 1079,
-        'sport area': 1079,
-        'danau eceng': 454,
-        'jelajah danau': 454,
-        'wisata alam bagendit': 454,
+        "objek_wisata_id": 1,
+        "nama": "mesjid al-ahzar",
+        "week": 21,
+        "sum": "1579"
       },
       {
-        "Week": "Week 22",
-        'mesjid al-ahzar': 1839,
-        'kantin bagendit': 1839,
-        'bagendit store': 1839,
-        'taman main anak': 1839,
-        'photo spots': 1259,
-        'taman anggrek': 1259,
-        'sport area': 1259,
-        'danau eceng': 572,
-        'jelajah danau': 572,
-        'wisata alam bagendit': 572,
+        "objek_wisata_id": 1,
+        "nama": "mesjid al-ahzar",
+        "week": 22,
+        "sum": "1779"
       },
       {
-        "Week": "Week 23",
-        'mesjid al-ahzar': 1507,
-        'kantin bagendit': 1507,
-        'bagendit store': 1507,
-        'taman main anak': 1507,
-        'photo spots': 1197,
-        'taman anggrek': 1197,
-        'sport area': 1197,
-        'danau eceng': 501,
-        'jelajah danau': 501,
-        'wisata alam bagendit': 501,
+        "objek_wisata_id": 1,
+        "nama": "mesjid al-ahzar",
+        "week": 23,
+        "sum": "1440"
       },
-    ];
-  </script>
+      {
+        "objek_wisata_id": 2,
+        "nama": "kantin bagendit",
+        "week": 17,
+        "sum": "173"
+      },
+      {
+        "objek_wisata_id": 2,
+        "nama": "kantin bagendit",
+        "week": 18,
+        "sum": "2022"
+      },
+      {
+        "objek_wisata_id": 2,
+        "nama": "kantin bagendit",
+        "week": 19,
+        "sum": "2060"
+      },
+      {
+        "objek_wisata_id": 2,
+        "nama": "kantin bagendit",
+        "week": 20,
+        "sum": "1837"
+      },
+      {
+        "objek_wisata_id": 2,
+        "nama": "kantin bagendit",
+        "week": 21,
+        "sum": "1579"
+      },
+      {
+        "objek_wisata_id": 2,
+        "nama": "kantin bagendit",
+        "week": 22,
+        "sum": "1779"
+      },
+      {
+        "objek_wisata_id": 2,
+        "nama": "kantin bagendit",
+        "week": 23,
+        "sum": "1440"
+      },
+      {
+        "objek_wisata_id": 3,
+        "nama": "bagendit store",
+        "week": 17,
+        "sum": "173"
+      },
+      {
+        "objek_wisata_id": 3,
+        "nama": "bagendit store",
+        "week": 18,
+        "sum": "2022"
+      },
+      {
+        "objek_wisata_id": 3,
+        "nama": "bagendit store",
+        "week": 19,
+        "sum": "2060"
+      },
+      {
+        "objek_wisata_id": 3,
+        "nama": "bagendit store",
+        "week": 20,
+        "sum": "1837"
+      },
+      {
+        "objek_wisata_id": 3,
+        "nama": "bagendit store",
+        "week": 21,
+        "sum": "1579"
+      },
+      {
+        "objek_wisata_id": 3,
+        "nama": "bagendit store",
+        "week": 22,
+        "sum": "1779"
+      },
+      {
+        "objek_wisata_id": 3,
+        "nama": "bagendit store",
+        "week": 23,
+        "sum": "1440"
+      },
+      {
+        "objek_wisata_id": 4,
+        "nama": "taman main anak",
+        "week": 17,
+        "sum": "173"
+      },
+      {
+        "objek_wisata_id": 4,
+        "nama": "taman main anak",
+        "week": 18,
+        "sum": "2022"
+      },
+      {
+        "objek_wisata_id": 4,
+        "nama": "taman main anak",
+        "week": 19,
+        "sum": "2060"
+      },
+      {
+        "objek_wisata_id": 4,
+        "nama": "taman main anak",
+        "week": 20,
+        "sum": "1837"
+      },
+      {
+        "objek_wisata_id": 4,
+        "nama": "taman main anak",
+        "week": 21,
+        "sum": "1579"
+      },
+      {
+        "objek_wisata_id": 4,
+        "nama": "taman main anak",
+        "week": 22,
+        "sum": "1779"
+      },
+      {
+        "objek_wisata_id": 4,
+        "nama": "taman main anak",
+        "week": 23,
+        "sum": "1440"
+      },
+      {
+        "objek_wisata_id": 5,
+        "nama": "photo spots",
+        "week": 17,
+        "sum": "124"
+      },
+      {
+        "objek_wisata_id": 5,
+        "nama": "photo spots",
+        "week": 18,
+        "sum": "1359"
+      },
+      {
+        "objek_wisata_id": 5,
+        "nama": "photo spots",
+        "week": 19,
+        "sum": "1212"
+      },
+      {
+        "objek_wisata_id": 5,
+        "nama": "photo spots",
+        "week": 20,
+        "sum": "1338"
+      },
+      {
+        "objek_wisata_id": 5,
+        "nama": "photo spots",
+        "week": 21,
+        "sum": "1132"
+      },
+      {
+        "objek_wisata_id": 5,
+        "nama": "photo spots",
+        "week": 22,
+        "sum": "1215"
+      },
+      {
+        "objek_wisata_id": 5,
+        "nama": "photo spots",
+        "week": 23,
+        "sum": "1158"
+      },
+      {
+        "objek_wisata_id": 6,
+        "nama": "taman anggrek",
+        "week": 17,
+        "sum": "124"
+      },
+      {
+        "objek_wisata_id": 6,
+        "nama": "taman anggrek",
+        "week": 18,
+        "sum": "1359"
+      },
+      {
+        "objek_wisata_id": 6,
+        "nama": "taman anggrek",
+        "week": 19,
+        "sum": "1212"
+      },
+      {
+        "objek_wisata_id": 6,
+        "nama": "taman anggrek",
+        "week": 20,
+        "sum": "1338"
+      },
+      {
+        "objek_wisata_id": 6,
+        "nama": "taman anggrek",
+        "week": 21,
+        "sum": "1132"
+      },
+      {
+        "objek_wisata_id": 6,
+        "nama": "taman anggrek",
+        "week": 22,
+        "sum": "1215"
+      },
+      {
+        "objek_wisata_id": 6,
+        "nama": "taman anggrek",
+        "week": 23,
+        "sum": "1158"
+      },
+      {
+        "objek_wisata_id": 7,
+        "nama": "sport area",
+        "week": 17,
+        "sum": "124"
+      },
+      {
+        "objek_wisata_id": 7,
+        "nama": "sport area",
+        "week": 18,
+        "sum": "1359"
+      },
+      {
+        "objek_wisata_id": 7,
+        "nama": "sport area",
+        "week": 19,
+        "sum": "1212"
+      },
+      {
+        "objek_wisata_id": 7,
+        "nama": "sport area",
+        "week": 20,
+        "sum": "1338"
+      },
+      {
+        "objek_wisata_id": 7,
+        "nama": "sport area",
+        "week": 21,
+        "sum": "1132"
+      },
+      {
+        "objek_wisata_id": 7,
+        "nama": "sport area",
+        "week": 22,
+        "sum": "1215"
+      },
+      {
+        "objek_wisata_id": 7,
+        "nama": "sport area",
+        "week": 23,
+        "sum": "1158"
+      },
+      {
+        "objek_wisata_id": 8,
+        "nama": "danau eceng",
+        "week": 17,
+        "sum": "55"
+      },
+      {
+        "objek_wisata_id": 8,
+        "nama": "danau eceng",
+        "week": 18,
+        "sum": "595"
+      },
+      {
+        "objek_wisata_id": 8,
+        "nama": "danau eceng",
+        "week": 19,
+        "sum": "570"
+      },
+      {
+        "objek_wisata_id": 8,
+        "nama": "danau eceng",
+        "week": 20,
+        "sum": "457"
+      },
+      {
+        "objek_wisata_id": 8,
+        "nama": "danau eceng",
+        "week": 21,
+        "sum": "496"
+      },
+      {
+        "objek_wisata_id": 8,
+        "nama": "danau eceng",
+        "week": 22,
+        "sum": "554"
+      },
+      {
+        "objek_wisata_id": 8,
+        "nama": "danau eceng",
+        "week": 23,
+        "sum": "477"
+      },
+      {
+        "objek_wisata_id": 9,
+        "nama": "jelajah danau",
+        "week": 17,
+        "sum": "55"
+      },
+      {
+        "objek_wisata_id": 9,
+        "nama": "jelajah danau",
+        "week": 18,
+        "sum": "595"
+      },
+      {
+        "objek_wisata_id": 9,
+        "nama": "jelajah danau",
+        "week": 19,
+        "sum": "570"
+      },
+      {
+        "objek_wisata_id": 9,
+        "nama": "jelajah danau",
+        "week": 20,
+        "sum": "457"
+      },
+      {
+        "objek_wisata_id": 9,
+        "nama": "jelajah danau",
+        "week": 21,
+        "sum": "496"
+      },
+      {
+        "objek_wisata_id": 9,
+        "nama": "jelajah danau",
+        "week": 22,
+        "sum": "554"
+      },
+      {
+        "objek_wisata_id": 9,
+        "nama": "jelajah danau",
+        "week": 23,
+        "sum": "477"
+      },
+      {
+        "objek_wisata_id": 10,
+        "nama": "wisata alam bagendit",
+        "week": 17,
+        "sum": "55"
+      },
+      {
+        "objek_wisata_id": 10,
+        "nama": "wisata alam bagendit",
+        "week": 18,
+        "sum": "595"
+      },
+      {
+        "objek_wisata_id": 10,
+        "nama": "wisata alam bagendit",
+        "week": 19,
+        "sum": "570"
+      },
+      {
+        "objek_wisata_id": 10,
+        "nama": "wisata alam bagendit",
+        "week": 20,
+        "sum": "457"
+      },
+      {
+        "objek_wisata_id": 10,
+        "nama": "wisata alam bagendit",
+        "week": 21,
+        "sum": "496"
+      },
+      {
+        "objek_wisata_id": 10,
+        "nama": "wisata alam bagendit",
+        "week": 22,
+        "sum": "554"
+      },
+      {
+        "objek_wisata_id": 10,
+        "nama": "wisata alam bagendit",
+        "week": 23,
+        "sum": "477"
+      }
+    ]
+
+
+    var chartData = []
+    let weekData = {}
+    let finalData = []
+
+
+    const weeks = [...new Set(favoritePlace.map(e => e.week))]
+    const chartDataGroup = weeks.map(e => ({
+      // 'Week': 'Week ' + e,
+      'data': []
+    }))
+
+    weeks.map((e, n) => {
+      for (let i = 0; i < favoritePlace.length; i++) {
+        if (e === favoritePlace[i].week) {
+          weekData.Week = e
+          weekData[favoritePlace[i].nama] = parseInt(favoritePlace[i].sum)
+          chartData.push(weekData)
+        } else {
+          weekData = {}
+        }
+      }
+
+      for (let i = 0; i < chartData.length; i++) {
+        if (e == chartData[i].Week) {
+          chartDataGroup[n].data.push(chartData[i])
+        }
+      }
+      let spreadData = [
+        ...chartDataGroup[n].data
+      ].reduce((prev, cur) => {
+        cur.Week = "Week " + cur.Week
+        return ({
+          ...prev,
+          ...cur
+        })
+      })
+      finalData.push(spreadData)
+    })
+
+  </script> -->
 </body>
 
 </html>
